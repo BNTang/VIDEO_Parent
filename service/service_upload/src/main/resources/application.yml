@@ -19,7 +19,7 @@ spring:
 
 # 定义oss相关属性
 oss:
-  endpoint: oss-cn-shanghai.aliyuncs.com
-  accessKeyId: LTAI5tLRxdEYdyFCEpVycBnr
-  accessKeySecret: puutmHyIcNuXb3dJbVUB4Vx2KFTY0K
-  bucketName: bntang
+  endpoint: xxx
+  accessKeyId: xxx
+  accessKeySecret: xxx
+  bucketName: xxx
