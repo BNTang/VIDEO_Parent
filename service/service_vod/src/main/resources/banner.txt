@@ -1,0 +1,10 @@
+|------------------|
+|                _ |
+|               | ||
+|__   _____   __| ||
+|\ \ / / _ \ / _` ||
+| \ V / (_) | (_| ||
+|  \_/ \___/ \__,_||
+|------------------|
+spring.application.name: ${spring.application.name}
+Spring-Boot: ${spring-boot.version}

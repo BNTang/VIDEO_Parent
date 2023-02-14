@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.it6666.service_auth.mapper.MenuMapper">
+    <select id="selectAllMenuValue" resultType="java.lang.String">
+        SELECT permission_value
+        FROM auth_menu
+        WHERE type = 2
+          AND is_deleted = 0
+    </select>
+    <select id="selectMenuValueByUserId" resultType="java.lang.String">
+        SELECT p.permission_value
+        FROM auth_user_role ur
+                     INNER JOIN auth_role_menu rp ON rp.role_id = ur.role_id
+                     INNER JOIN auth_menu p ON p.id = rp.permission_id
+        WHERE ur.user_id = #{userId}
+          AND p.type = 2
+          AND ur.is_deleted = 0
+          AND rp.is_deleted = 0
+          AND p.is_deleted = 0
+    </select>
+    <select id="selectMenuByUserId" resultType="top.it6666.service_auth.entity.Menu">
+        SELECT p.id,
+               p.pid,
+               p.name,
+               p.type,
+               p.permission_value,
+               path,
+               p.component,
+               p.icon,
+               p.status,
+               p.is_deleted
+        FROM auth_user_role ur
+                     INNER JOIN auth_role_menu rp ON rp.role_id = ur.role_id
+                     INNER JOIN auth_menu p ON p.id = rp.permission_id
+        WHERE ur.user_id = #{userId}
+          AND ur.is_deleted = 0
+          AND rp.is_deleted = 0
+          AND p.is_deleted = 0
+    </select>
+</mapper>

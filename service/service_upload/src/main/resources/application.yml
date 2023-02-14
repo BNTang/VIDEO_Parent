@@ -1,0 +1,25 @@
+# application-dev.yml
+server:
+  port: 8002
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+spring:
+  application:
+    name: service-upload
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        # nacos服务的地址，不要加http
+        server-addr: localhost:8848
+
+# 定义oss相关属性
+oss:
+  endpoint: oss-cn-shanghai.aliyuncs.com
+  accessKeyId: LTAI5tLRxdEYdyFCEpVycBnr
+  accessKeySecret: puutmHyIcNuXb3dJbVUB4Vx2KFTY0K
+  bucketName: bntang

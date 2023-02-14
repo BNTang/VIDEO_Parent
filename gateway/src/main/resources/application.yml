@@ -1,0 +1,52 @@
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+server:
+  port: 9000
+
+spring:
+  application:
+    # 此实例注册到服务端的name
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 180.76.177.246:8848
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-video
+          uri: lb://service-video
+          predicates:
+            - Path=/service_video/**
+        - id: service-vod
+          uri: lb://service-vod
+          predicates:
+            - Path=/service_vod/**
+        - id: service-upload
+          uri: lb://service-upload
+          predicates:
+            - Path=/service_upload/**
+        - id: service-auth
+          uri: lb://service-auth
+          predicates:
+            - Path=/service_auth/**
+        - id: service-cms
+          uri: lb://service-cms
+          predicates:
+            - Path=/service_cms/**
+        - id: service-sms
+          uri: lb://service-sms
+          predicates:
+            - Path=/service_sms/**
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/service_user/**
+        - id: service-pay
+          uri: lb://service-pay
+          predicates:
+            - Path=/service_pay/**

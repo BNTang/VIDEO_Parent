@@ -1,0 +1,59 @@
+server:
+  port: 8008
+
+logging:
+  pattern:
+    console: "%clr(%5p) %clr(-){faint} %clr(%-80.80logger{79}){cyan} %clr(:) %m%n"
+
+spring:
+  application:
+    name: service-pay
+  profiles:
+    active: dev
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/video_db?serverTimezone=GMT%2B8
+    username: root
+    password: root
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: HikariPool
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8088
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: top/it6666/service_pay/mapper/xml/*.xml
+
+feign:
+  sentinel:
+    enabled: true
+
+pay:
+  alibaba:
+    # appid
+    APPID: 2021000117670319
+    # 私有秘钥
+    privateKey: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCqezuaPcxe6cv4YkcJr10wMJNA/EafzGwu8/BZ+FMJJIeeSDryk0OY2Dbb9wFXAFfRLBoPCOetsb/a8M4FTadVUuzKbLcDDJA9l0R3N3LW3+Kk/u79Ar9cb3SNo34UIgoiaK0h0gzB9bnBrck/UsJ9vN9qPw9LVjrfUKUeivALENUxMfNUcksmXD6L3FhLq0qahOL1GQqIP+zpLsGjh/LmT2uibkaotholtX7qWSGS25zrwEW0PXv0MV8IU8KF14oJ+FeLd9vajhCe1SLl4mzm0xy5j7ovTa84AndJ2iWf4+biVDLuHmEJ1yPCNadaC475a/Avl4VbqZSnK7EFYp4jAgMBAAECggEBAJVh2j4zPGtGjhYdd4XDBfL9/WoKJJBNfdY+pjMP5yKxwawuOojoBWleu+NOsvvbLxf4fvUBppCKmkRskPoQqzmWqipNzKd9UL7HV5TnH1etYlmVkTBeQfPrLcQWqJlXom24L0zdU5R5jsVpVFiKWiX3ZAUjMHGhI4EelzEGKYRnU17RPvGhVejZpj9FWYOSePLjx1oj6qaNJuUc2reKh2SSxqsjciX5GfT46y20ltR+3XN/fSRLPSOjk0WH6obNaG4O2+/scT9H3U219OKZ95MZ7aHQSgiPV+zCnj/R/9xC+P6KQse4eDBe8JILAb7yFwddu+qTFsN/X62HLH/+TrECgYEA1EHlglnF+v1IwANMFMS2zaAaN+4i+g7WG8oepXFNTIbPq17r1MSUaaOCuA3GIpm6zmp0ViccOIvC+1Ef1d00OWRxKLos/tbMFJlsELLWYUWKqMXpYFu8bRkCMqs6YkI2T5oEHjndSjVmBVen+lOLvyi6I9MCajk/YwSTE3q6X8cCgYEAzZ1ZvGKjpiTQ/Huw3Y2EYyJSFgkGJRzAiN3IS0CNIEGfERhNjzV95/k9DlrVCsFKKtqBD/GFOJthx0qhK3VmJaFQZSo3l02X+HKh7v0DbEyskMBCZXLp7ImkCczMSkmz84TRo8R5uQ7zjZeW0McuCTVy5n4XsKi43utGLfkFxsUCgYBrBIqGLWM/yAKtJTxv4DrW9BkkCAJEl8RmIINRIQ47PmFoYyR+k1rM5G8dA3zZpy7jshLT+UYmUHlPozhs6OnS4gyX3z6egohE/pHY3YJvatOdgqPHPJmFXC2ahHCcaAvgGKRo5P3o04GLwgVklkkIaa1oMJSwIAsQjpblJGThswKBgH5O0egy4/rVFPh092IyZAgN9kUJCBhWQEQTkc4AenE9Pnze5A48Ovr8lbAyxjqUIH6QucXUhRUQBpHJW5Z5yOUG4n8y3vF4PgnmSWmpTagCteM558+wNtkSeI14nGpqOjw29B1ZPbkb4Suy2neoU7RefBXxkZX5H4/5EaR+HDlNAoGANXJT802PtBIH1vZ0KXmBSrRJwpqCCltiYjBMMaN+oWxLpZPP2adAdtZKl+wH5eF7hR0cD4XdXvCkcpW8BzFzbrTcOPDkSrZqJRD8w7s4oIvVaAWu3aH5Cz1yhXYoqUaAQxIkniBCfHAwlAL7QBbju5mr1kuLrFaxDCkFSE6szjM=
+    # 支付宝公有密钥
+    publvicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnhUodJwARSpK3+rYBwdO/YmFZHrZKm1LD1OPakz9qpsFlws/peFuj1m0/MyPAHP9rLbytDmMDekaOxpe7KUo5lunW5xlOl/Nz8fKKunObE7hYy7v8I3R7BKJlpuY41BrP+2uyEHwI3npU/yY3zqtov2eRQjyQ0lyltLlf2lVibW/6VYasxyfmg1i+Ubx4eGAjynVAwdS8aK3iNEC5Qdg6l5yeUADKv0M5fLphhNB8i8V/iJpnlRJV7CqhRyrHI4dxKg34LKVTJ3dSxD4rjR8lmBC0IUlflyYnHJKFxDziu8B0wkwDHRaEtUDvzfixhhOooC7wJLCXtlObtUsjlUUxwIDAQAB
+    # 支付宝服务地址
+    serverUrl: https://openapi.alipaydev.com/gateway.do
+    # 回调地址, 注意这里服务器回调一定要公网ip
+    returnUrl: https://it6666.cn1.utools.club/callback/returnUrl
+    notyfyUrl: https://it6666.cn1.utools.club/callback/notifyUrl
